@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>less与sass的差异（一） | whiteSmallTown</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="工匠精神，写在最前最近彻彻底底思考了一下工匠精神。以前一个架构师对我说过，咱们其实也算是个手艺人。既然是手艺人，就要对自己做出来的活儿精益求精，至于钱和权位，应该是你的手艺不断加深情况下的附属品，放个链接吧，什么是工匠精神。
+css预处理言归正传，来新公司也快两个月了，公司用到的css预处理器是less，最近刚把less用到熟练。在这之前，一直在用sass。其实我一直都挺喜欢sass，自从第一次用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="less与sass的差异（一）">
+<meta property="og:url" content="whitesmalltown.com/2015/10/12/less与sass的差异（一）/index.html">
+<meta property="og:site_name" content="whiteSmallTown">
+<meta property="og:description" content="工匠精神，写在最前最近彻彻底底思考了一下工匠精神。以前一个架构师对我说过，咱们其实也算是个手艺人。既然是手艺人，就要对自己做出来的活儿精益求精，至于钱和权位，应该是你的手艺不断加深情况下的附属品，放个链接吧，什么是工匠精神。
+css预处理言归正传，来新公司也快两个月了，公司用到的css预处理器是less，最近刚把less用到熟练。在这之前，一直在用sass。其实我一直都挺喜欢sass，自从第一次用">
+<meta property="og:image" content="whitesmalltown.com/imgs/less与sass的差异/jiangxin.jpg">
+<meta property="og:updated_time" content="2015-10-13T14:14:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="less与sass的差异（一）">
+<meta name="twitter:description" content="工匠精神，写在最前最近彻彻底底思考了一下工匠精神。以前一个架构师对我说过，咱们其实也算是个手艺人。既然是手艺人，就要对自己做出来的活儿精益求精，至于钱和权位，应该是你的手艺不断加深情况下的附属品，放个链接吧，什么是工匠精神。
+css预处理言归正传，来新公司也快两个月了，公司用到的css预处理器是less，最近刚把less用到熟练。在这之前，一直在用sass。其实我一直都挺喜欢sass，自从第一次用">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  
+    <link rel="stylesheet" href="/scrollLoading/style.css" type="text/css">
+  
+  
+
+
+  
+
+  
+    <link href='//fonts.useso.com/css?family=Titillium+Web:300,400,600' rel='stylesheet' type='text/css'>
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+</head>
+
+<body>
+  <div id="wrap">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div class="container">
+      <div class="container-inner">
+        <div id="header-title">
+          <h1 class="logo-wrap">
+            <a href="/" class="logo"></a>
+          </h1>
+          
+            <h2 class="subtitle-wrap">
+              <p class="subtitle">白色小城</p>
+            </h2>
+          
+        </div>
+        <div id="header-inner" class="nav-container">
+          <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+          <div class="nav-container-inner">
+            <ul id="main-nav">
+              
+                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/">主页</a></li>
+              
+                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Javascript/">Javascript</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></li></ul></li></ul>
+                  
+                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/about/index.html">关于</a></li>
+              
+            </ul>
+            <nav id="sub-nav">
+              <div id="search-form-wrap">
+                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="搜索"><input type="hidden" name="sitesearch" value="whitesmalltown.com"></form>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <div class="main-body container-inner">
+        <div class="main-body-inner">
+          <section id="main">
+            <div class="main-body-header">
+
+              <h1 class="header">未分类</h1>
+            </div>
+            <div class="main-body-content">
+              
+  <article id="post-less与sass的差异（一）" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+      <!--  -->
+      
+        <header class="article-header">
+          
+  
+    <h1 class="article-title" itemprop="name">
+      less与sass的差异（一）
+    </h1>
+  
+
+        </header>
+      
+      <p class="article-byline">
+        <a href="/2015/10/12/less与sass的差异（一）/" class="article-date">
+  <time datetime="2015-10-12T15:04:12.000Z" itemprop="datePublished">2015-10-12</time>
+</a>
+      </p>
+      <div class="article-entry" itemprop="articleBody">
+        <h2 id="工匠精神，写在最前">工匠精神，写在最前</h2><p><img src="/imgs/less与sass的差异/jiangxin.jpg" alt="工匠精神" title="工匠精神"><br>最近彻彻底底思考了一下工匠精神。<br>以前一个架构师对我说过，咱们其实也算是个手艺人。<br>既然是手艺人，就要对自己做出来的活儿精益求精，至于钱和权位，应该是你的手艺不断加深情况下的附属品，放个链接吧，<a href="http://baike.baidu.com/link?url=Q-KbUb2gh4V7Wkzpe8q42jQ5eUBCbfAcDROh89rpk4uAn-Kwbq7ZHios-uVxfyOaVOYv0sWrgeG6Ttk8TDk8Za" title="百度百科" target="_blank" rel="external">什么是工匠精神</a>。</p>
+<h2 id="css预处理">css预处理</h2><p>言归正传，来新公司也快两个月了，公司用到的css预处理器是less，最近刚把less用到熟练。<br>在这之前，一直在用sass。其实我一直都挺喜欢sass，自从第一次用过之后，就觉得离不开了，用一FEXer的话说，包你爽到没朋友。<br>css预处理器，还有Stylus比较主流，可是一直没研究过，下面就把less和sass一些差异做下对比，再举个栗子，可能你就知道为什么我喜欢sass了。</p>
+<h3 id="变量">变量</h3><p>既然是面向对象，就少不了变量。<br>less和sass的变量，命名方式都差不多，也都有全局和局部之分，具体命名方式就不说了，单说差异。</p>
+<h4 id="全局变量和局部变量">全局变量和局部变量</h4><p>less的变量确实更直观一些，因为它的全局变量及局部变量，与js的相差无几，比如<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// less</span></span><br><span class="line"><span class="variable">@value:</span> <span class="number">0px</span>;</span><br><span class="line"><span class="class">.test1</span>&#123;</span><br><span class="line">    <span class="variable">@value:</span> <span class="number">1px</span>;  <span class="comment">// 结果是 width: 1px;</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="variable">@value</span>;</span><br><span class="line">    <span class="class">.test2</span>&#123;</span><br><span class="line">        <span class="variable">@value:</span> <span class="number">2px</span>;</span><br><span class="line">        <span class="attribute">width</span>: <span class="variable">@value</span>;  <span class="comment">// 结果是 width: 2px;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">@value</span>;  <span class="comment">// 结果是 height: 1px;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="variable">@value</span>;  <span class="comment">// 结果是 width: 0px;</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">@height</span>;  <span class="comment">// 报错啦！undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个不难理解吧，和js一样，但是sass就不一样了<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// scss</span><br><span class="line"><span class="variable">$value</span>: 0px;</span><br><span class="line">.test1&#123;</span><br><span class="line">    <span class="variable">$value</span>: <span class="number">1</span>px;  // 结果是 width: <span class="number">1</span>px;</span><br><span class="line">    width: <span class="variable">$value</span>;</span><br><span class="line">    .test2&#123;</span><br><span class="line">        <span class="variable">$value</span>: <span class="number">2</span>px;</span><br><span class="line">        width: <span class="variable">$value</span>;  // 结果是 width: <span class="number">2</span>px;</span><br><span class="line">    &#125;</span><br><span class="line">    height: <span class="variable">$value</span>;  // 神奇的事情发生了，结果是 height: <span class="number">2</span>px;</span><br><span class="line">&#125;</span><br><span class="line">div&#123;</span><br><span class="line">    width: <span class="variable">$value</span>;  // 结果是 width: 0px;</span><br><span class="line">    height: <span class="variable">$height</span>;  // 报错啦！undefined</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不一样的地方，就是test2中的$value改变之后，由于它也是test1中的局部变量，因此test1中的$value也发生了变化，所以，在之后的height属性也发生了变化。<br>而且，有意思的事情来了，sass的变量，有两个关键字 “!default” 和 “global”。<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// scss</span><br><span class="line"><span class="variable">$value</span>: 0px;</span><br><span class="line">.test1&#123;</span><br><span class="line">    <span class="variable">$value</span>: <span class="number">1</span>px;  // 结果是 width: <span class="number">1</span>px;</span><br><span class="line">    width: <span class="variable">$value</span>;</span><br><span class="line">    .test2&#123;</span><br><span class="line">        <span class="variable">$value</span>: <span class="number">2</span>px !default;</span><br><span class="line">        width: <span class="variable">$value</span>;  // 结果是 width: <span class="number">1</span>px;</span><br><span class="line">    &#125;</span><br><span class="line">    height: <span class="variable">$value</span>;  // 结果是 height: <span class="number">1</span>px;</span><br><span class="line">&#125;</span><br><span class="line">div&#123;</span><br><span class="line">    width: <span class="variable">$value</span>;  // 结果是 width: 0px;</span><br><span class="line">    height: <span class="variable">$height</span>;  // 报错啦！undefined</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>!default 表示，如果之前已经为该变量赋值，就是用之前变量的值，如果没有，就赋给这个值，有点像js里的：<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">value</span> = <span class="keyword">value</span> || <span class="number">2p</span>x;</span><br></pre></td></tr></table></figure></p>
+<p>而!global，则表示此时赋值的变量，是个全局变量：<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// scss</span><br><span class="line"><span class="variable">$value</span>: 0px;</span><br><span class="line">.test1&#123;</span><br><span class="line">    <span class="variable">$value</span>: <span class="number">1</span>px;  // 结果是 width: <span class="number">1</span>px;</span><br><span class="line">    width: <span class="variable">$value</span>;</span><br><span class="line">    .test2&#123;</span><br><span class="line">        <span class="variable">$value</span>: <span class="number">2</span>px !global;</span><br><span class="line">        <span class="variable">$height</span>: <span class="number">3</span>px !global;</span><br><span class="line">        width: <span class="variable">$value</span>;  // 结果是 width: <span class="number">1</span>px;</span><br><span class="line">    &#125;</span><br><span class="line">    height: <span class="variable">$value</span>;  // 结果是 width: <span class="number">1</span>px;</span><br><span class="line">&#125;</span><br><span class="line">div&#123;</span><br><span class="line">    width: <span class="variable">$value</span>;  // 结果是 width: <span class="number">2</span>px;</span><br><span class="line">    height: <span class="variable">$height</span>;  // 结果是 width: <span class="number">3</span>px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>也就是说test2中的$value值，覆盖掉第一行的$value值，而且test2中的$height值，在test2之外也可以获取了。</p>
+<p>如果说我按照避免这些差异去给变量赋值，less或sass生成的css，都会相同，但是接下来要介绍的变量赋值，不是你想避免就可以避免的，就赋多个值。<br>首先，less和sass都可以给一个变量赋多个值，这点没有问题<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// less</span></span><br><span class="line"><span class="at_rule">@test:<span class="preprocessor"> 1px</span><span class="preprocessor"> solid</span> <span class="hexcolor">#ccc</span>;</span></span><br><span class="line"><span class="function">length</span>(<span class="at_rule">@test);</span>  <span class="comment">//  @test值的个数，结果为3</span></span><br><span class="line"><span class="function">extract</span>(<span class="at_rule">@test,<span class="preprocessor"> 2</span>);</span>  <span class="comment">//获取@test中的第二个值，结果为solid</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// scss</span></span><br><span class="line"><span class="variable">$test</span><span class="value">: <span class="number">1px</span> solid <span class="hexcolor">#ccc</span>;</span></span><br><span class="line"><span class="function">length</span>(<span class="variable">$test</span>);  <span class="comment">//  @test值的个数，结果为3</span></span><br><span class="line"><span class="function">nth</span>(<span class="variable">$test</span>, 2);  <span class="comment">//  获取@test中的第二个值，结果为solid</span></span><br></pre></td></tr></table></figure>
+<p>less和sass中，把这样的赋予多个值称为list，你可以把他们理解成一维数组，毕竟less和sass都对他们封装了上述两个常用方法。除了这两个以外，sass还有其他的方法，处理这样的list。<br>如果你说我不用sass里其他处理list的其他方法，就用这两个，是不是less和sass的变量处理就一样了，那就图样了，毕竟，有一维数组，就有多维数组。<br>我试了下，less处理多列表（类似js里的多维数组），只能靠”,” “空格” 去隔开，比如这样：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// less</span></span><br><span class="line"><span class="variable">@test-list:</span> a1 a2, b1 b2, c1 c2;  <span class="comment">// 类似一个二维数组</span></span><br></pre></td></tr></table></figure></p>
+<p>就这样，再往下就没法写了，因为less的变量里，不支持() | [] | {}这样的括号，又不知道”空格”再下一层用什么分开，而sass就不一样了，直接用小括号嵌套就可以了：<br><figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// scss</span></span><br><span class="line"><span class="comment">// 比less不知高到哪里去了</span></span><br><span class="line"><span class="keyword">$t</span>est-list: <span class="params">(</span><br><span class="line">    <span class="params">(</span><br><span class="line">        <span class="params">(a11, a12)</span>,</span><br><span class="line">        <span class="params">(a21, a22)</span>,</span><br><span class="line">    )</span>,</span><br><span class="line">    <span class="params">(</span><br><span class="line">        <span class="params">(b11, b12)</span>,</span><br><span class="line">        <span class="params">(b21, b22)</span>,</span><br><span class="line">    )</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure></p>
+<p>只要我想，还可以往下写，a111，乃至 a11111，当然越深越不好控制，但这确实很有用，而且sass中的变量，还有个less不能比的地方，就是map。<br>map就是用key和value组成，提到这两个关键字，你应该就明白了，类似js里的json格式，而且sass也为map提供了一些map的内置方法，如果灵活掌握了，要比less好用的多：<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// scss</span><br><span class="line">// 都可以和你谈笑风生了</span><br><span class="line"><span class="variable">$test</span>: (</span><br><span class="line">    <span class="string">'key1'</span>:(</span><br><span class="line">        <span class="string">'key11'</span> : <span class="number">11</span>px,</span><br><span class="line">        <span class="string">'key12'</span> : <span class="number">12</span>px</span><br><span class="line">    ),</span><br><span class="line">    <span class="string">'key2'</span>:(</span><br><span class="line">        <span class="string">'key21'</span> : <span class="number">21</span>px,</span><br><span class="line">        <span class="string">'key22'</span> : <span class="number">22</span>px</span><br><span class="line">    )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">.test&#123;</span><br><span class="line">    <span class="variable">$key1</span>: map-get(<span class="variable">$test</span>, key1);</span><br><span class="line">    width: map-get(<span class="variable">$key1</span>, key11);  // 结果为 width: <span class="number">11</span>px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>变量的差异说完了，觉得哪个好，不用我说了吧，下面的内容更让你明白。</p>
+<h3 id="逻辑关键字">逻辑关键字</h3><p>逻辑关键字对于程序员来说，都不陌生，很多语言都是想通的，sass也一样，主要有这么几个：<br><strong>@if @else</strong><br><strong>@for</strong><br><strong>@each</strong><br><strong>@while</strong><br>功能就不用多说了吧，大家一看就明白，至于用法看看api百度一下就很容易上手了。<br>那less呢？<br>据我观察，貌似就一个，when。<br>对，就一个when。<br>不管你是条件判断，还是循环，统统用when，比如下面这个官方给出的循环栗子：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.loop</span>(<span class="variable">@counter</span>) <span class="keyword">when</span> (<span class="variable">@counter</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="class">.loop</span>((<span class="variable">@counter</span> - <span class="number">1</span>));    <span class="comment">// next iteration</span></span><br><span class="line">    <span class="attribute">width</span>: (<span class="number">10px</span> * <span class="variable">@counter</span>); <span class="comment">// code for each iteration</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">div</span> &#123;</span><br><span class="line">    <span class="class">.loop</span>(<span class="number">5</span>); <span class="comment">// launch the loop</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> *  输出结果为：</span><br><span class="line"> *</span><br><span class="line"> *  div &#123;</span><br><span class="line"> *      width: 10px;</span><br><span class="line"> *      width: 20px;</span><br><span class="line"> *      width: 30px;</span><br><span class="line"> *      width: 40px;</span><br><span class="line"> *      width: 50px;</span><br><span class="line"> *  &#125;</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure></p>
+<p>如果说变量实际使用是差别不大我也就忍了，可是这如果用less封装个方法，涉及到的逻辑比较复杂，岂不是相当容易乱？比如最近我写的下面这个方法：<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// animate</span></span><br><span class="line">._wst-animate(<span class="variable">@ani</span>-name, <span class="variable">@ani</span>-animation, <span class="variable">@ani</span>...)&#123;</span><br><span class="line">    <span class="variable">@ani</span>-len: length(<span class="variable">@arguments</span>);</span><br><span class="line">    ._wst-animate-loop(<span class="variable">@l</span>, <span class="variable">@args</span>...) when (<span class="variable">@l</span> &gt; <span class="number">2</span>)&#123;</span><br><span class="line">        <span class="variable">@ani</span>-evt: extract(<span class="variable">@args</span>, <span class="variable">@l</span>); <span class="comment">// 除了ani-name以外的其他参数(以;为分割), 0%, border 1px solid #ccc, height 0px;</span></span><br><span class="line">        <span class="variable">@p</span>: extract(<span class="variable">@ani</span>-evt, <span class="number">1</span>); <span class="comment">// 动画进度, 比如：10%</span></span><br><span class="line">        <span class="variable">@&#123;p&#125;</span>&#123;</span><br><span class="line">            ._wst-animate-loop-<span class="number">2</span>(<span class="variable">@l</span>-<span class="number">2</span>, <span class="variable">@args</span>-<span class="number">2</span>) when (<span class="variable">@l</span>-<span class="number">2</span> &gt; <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="variable">@sty</span>: extract(<span class="variable">@args</span>-<span class="number">2</span>, <span class="variable">@l</span>-<span class="number">2</span>); <span class="comment">// 每个样式(以,分割)，如 transform 'translateY(0px) scale(0)'</span></span><br><span class="line">                <span class="variable">@key</span>: extract(<span class="variable">@sty</span>, <span class="number">1</span>);</span><br><span class="line">                <span class="variable">@val</span>: extract(<span class="variable">@sty</span>, <span class="number">2</span>);</span><br><span class="line">                <span class="comment">// 前缀写法</span></span><br><span class="line">                <span class="variable">@wbk</span>: replace(<span class="string">'@&#123;key&#125;'</span>,<span class="string">'-wst-fix-'</span>,<span class="string">'-webkit-'</span>);</span><br><span class="line">                <span class="variable">@moz</span>: replace(<span class="string">'@&#123;key&#125;'</span>,<span class="string">'-wst-fix-'</span>,<span class="string">'-moz-'</span>);</span><br><span class="line">                ._wst-animate-prefix(<span class="variable">@wbk</span>, <span class="variable">@moz</span>) when not (<span class="variable">@wbk</span> = <span class="variable">@moz</span>)&#123;</span><br><span class="line">                    <span class="variable">@t</span>: e(replace(<span class="string">'@&#123;key&#125;'</span>,<span class="string">'-wst-fix-'</span>,<span class="string">''</span>));</span><br><span class="line">                    -webkit-<span class="variable">@&#123;t&#125;</span>: e(<span class="variable">@val</span>);</span><br><span class="line">                    -moz-<span class="variable">@&#123;t&#125;</span>: e(<span class="variable">@val</span>);</span><br><span class="line">                    <span class="variable">@&#123;t&#125;</span>: e(<span class="variable">@val</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                ._wst-animate-prefix(<span class="variable">@wbk</span>, <span class="variable">@moz</span>) when (<span class="variable">@wbk</span> = <span class="variable">@moz</span>)&#123;</span><br><span class="line">                    <span class="variable">@&#123;key&#125;</span>: e(<span class="variable">@val</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                ._wst-animate-prefix(<span class="variable">@wbk</span>, <span class="variable">@moz</span>);</span><br><span class="line">                ._wst-animate-loop-<span class="number">2</span>(<span class="variable">@l</span>-<span class="number">2</span> - <span class="number">1</span>, <span class="variable">@ani</span>-evt);</span><br><span class="line">            &#125;</span><br><span class="line">            ._wst-animate-loop-<span class="number">2</span>(length(<span class="variable">@ani</span>-evt), <span class="variable">@ani</span>-evt);</span><br><span class="line">        &#125;;</span><br><span class="line">        ._wst-animate-loop(<span class="variable">@l</span> - <span class="number">1</span>, <span class="variable">@args</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">@-</span>webkit-keyframes <span class="variable">@ani</span>-name&#123;</span><br><span class="line">        ._wst-animate-loop(<span class="variable">@ani</span>-len, <span class="variable">@arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">@-</span>moz-keyframes <span class="variable">@ani</span>-name&#123;</span><br><span class="line">        ._wst-animate-loop(<span class="variable">@ani</span>-len, <span class="variable">@arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">@keyframes</span> <span class="variable">@ani</span>-name&#123;</span><br><span class="line">        ._wst-animate-loop(<span class="variable">@ani</span>-len, <span class="variable">@arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    -webkit-animation+_: <span class="variable">@ani</span>-name;</span><br><span class="line">    -webkit-animation+_: <span class="variable">@ani</span>-animation;</span><br><span class="line">    -moz-animation+_: <span class="variable">@ani</span>-name;</span><br><span class="line">    -moz-animation+_: <span class="variable">@ani</span>-animation;</span><br><span class="line">    animation+_: <span class="variable">@ani</span>-name;</span><br><span class="line">    animation+_: <span class="variable">@ani</span>-animation;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//  测试</span></span><br><span class="line">.div&#123;</span><br><span class="line">    ._wst-animate(</span><br><span class="line">        earth;</span><br><span class="line">        <span class="number">1</span>s linear <span class="number">1</span>s infinite;</span><br><span class="line">        <span class="number">0</span><span class="variable">%,</span> -wst-fix-transform <span class="string">'translateY(0px) scale(0)'</span>, height <span class="string">'0px'</span>, opacity <span class="string">'0'</span>;</span><br><span class="line">        <span class="number">10</span><span class="variable">%,</span> -wst-fix-transform <span class="string">'translateY(10px) scale(10)'</span>, height <span class="string">'10px'</span>, opacity <span class="string">'10'</span>;</span><br><span class="line">        <span class="number">100</span><span class="variable">%,</span> -wst-fix-transform <span class="string">'translateY(100px) scale(100)'</span>, height <span class="string">'100px'</span>, opacity <span class="string">'100'</span>;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.div</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">-webkit-animation</span>:<span class="value"> earth <span class="number">1s</span> linear <span class="number">1s</span> infinite</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">-moz-animation</span>:<span class="value"> earth <span class="number">1s</span> linear <span class="number">1s</span> infinite</span></span>;</span><br><span class="line">  <span class="rule"><span class="attribute">animation</span>:<span class="value"> earth <span class="number">1s</span> linear <span class="number">1s</span> infinite</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="at_rule">@<span class="keyword">-webkit-keyframes</span> earth </span>&#123;</span><br><span class="line">  100% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">100</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">100px</span>) <span class="function">scale</span>(<span class="number">100</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-moz-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">100px</span>) <span class="function">scale</span>(<span class="number">100</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">100px</span>) <span class="function">scale</span>(<span class="number">100</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">  10% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">10</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">10px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">10px</span>) <span class="function">scale</span>(<span class="number">10</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-moz-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">10px</span>) <span class="function">scale</span>(<span class="number">10</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">10px</span>) <span class="function">scale</span>(<span class="number">10</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">  0% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">0px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">0px</span>) <span class="function">scale</span>(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-moz-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">0px</span>) <span class="function">scale</span>(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">0px</span>) <span class="function">scale</span>(<span class="number">0</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="at_rule">@<span class="keyword">-moz-keyframes</span> earth </span>&#123;</span><br><span class="line">  100% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">100</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">100px</span>) <span class="function">scale</span>(<span class="number">100</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-moz-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">100px</span>) <span class="function">scale</span>(<span class="number">100</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">100px</span>) <span class="function">scale</span>(<span class="number">100</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">  10% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">10</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">10px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">10px</span>) <span class="function">scale</span>(<span class="number">10</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-moz-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">10px</span>) <span class="function">scale</span>(<span class="number">10</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">10px</span>) <span class="function">scale</span>(<span class="number">10</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">  0% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">0px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">0px</span>) <span class="function">scale</span>(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-moz-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">0px</span>) <span class="function">scale</span>(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">0px</span>) <span class="function">scale</span>(<span class="number">0</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="at_rule">@<span class="keyword">keyframes</span> earth </span>&#123;</span><br><span class="line">  100% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">100</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">100px</span>) <span class="function">scale</span>(<span class="number">100</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-moz-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">100px</span>) <span class="function">scale</span>(<span class="number">100</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">100px</span>) <span class="function">scale</span>(<span class="number">100</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">  10% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">10</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">10px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">10px</span>) <span class="function">scale</span>(<span class="number">10</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-moz-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">10px</span>) <span class="function">scale</span>(<span class="number">10</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">10px</span>) <span class="function">scale</span>(<span class="number">10</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">  0% <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">0px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">0px</span>) <span class="function">scale</span>(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-moz-transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">0px</span>) <span class="function">scale</span>(<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translateY</span>(<span class="number">0px</span>) <span class="function">scale</span>(<span class="number">0</span>)</span></span>;</span><br><span class="line">  &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>看到没，这简直就是噩梦啊，这里的animation还是简写，如果逻辑再复杂点，不断的when嵌套when，到最后完全不知道哪个是条件判断，哪个是循环。而且上面说到的参数问题，也显示出来了，字符串都上了也没办法，list太深了呀。难道是我写的不好？</p>
+<h2 id="结尾">结尾</h2><p>这是最近在封装animate方法时，所体会到的，说实话我本人有些偏向sass，但不是说内心里就排斥less，毕竟sass的出现要比less晚几年，你不能说iPhone6比iPhone1强，就否认创造iPhone1的那些人吧。而且可能作者最初创造的目的也不相同，那个时候less还是依赖于js的，当时可以在css里写一个<strong><em>width: 1px + 1px;</em></strong>，那简直不得了啊，你想想现在calc()的兼容性都不是特别好。而且很多公司一直在用这个，你总不能刚来就要求改这改那，全都按你的想法来吧。<br>说到这我就必须说两句了，现在这样的人还挺多，刚进一家公司觉得架构过时，连之前的代码都没通看一遍，功能逻辑都不知道，上去就改核心架构，然后满公司的嚷嚷着”这代码太垃圾了”、”干嘛这么写啊，谁教的”。<br>其实你有没有想过，这些代码让公司平稳的运转了很多年，也许上千名员工依靠着它的运转来吃饭，真的就特别差吗？尤其是核心框架中的核心代码，每一行都有它的作用，每一行都是程序员们加班改了无数个bug，想遍了无数种可能，又经过了无数次优化，才变成现在这样。你以为这行代码冗余，它可能有它非常重要的作用。你刚进城就要开枪，你觉得php是最好的语言，或者你新学了一个框架正好没地方练手，大换血，来改吧，改来改去发现改不下去了，你觉得半年过了，新知识也练手了，加薪也不满意，差不多走了，留下一大堆烂摊子，接替你的人不光要理解之前架构，还要弄明白你的架构，解决你留下的bug，你换了工作薪水更高了，权位也更重了，你让前公司的创始人们怎么办？别说什么工匠精神了，这种人做人都有问题。<br>最后一句话，别忘了初心。</p>
+
+      </div>
+      <footer class="article-footer">
+        <a data-url="whitesmalltown.com/2015/10/12/less与sass的差异（一）/" data-id="cifpge6aw000dzys6qf2sz0dc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+        
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css预处理/">css预处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
+
+      </footer>
+    </div>
+  </article>
+  
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-less与sass的差异（一）" data-title="less与sass的差异（一）" data-url="whitesmalltown.com/2015/10/12/less与sass的差异（一）/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'whitesmalltown'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+
+            </div>
+          </section>
+          <aside id="sidebar">
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+  <div class="sidebar-top">
+    <p>关注我 :</p>
+    <ul class="social-links">
+      
+        <li><a class="social-tooltip" title="weibo" href="http://weibo.com/u/1037991452" target="_blank"><i class="icon fa fa-weibo"></i></a></li>
+      
+    </ul>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/09/15/swiper源码分析(一)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <p class="article-nav-title">Swiper.js源码分析(一)</p>
+      <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+    </a>
+  
+</nav>
+
+  
+  <div class="widgets-container">
+    
+      
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/10/12/less与sass的差异（一）/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/less与sass的差异/jiangxin.jpg
+)" alt="less与sass的差异（一）" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/10/12/less与sass的差异（一）/" class="title">less与sass的差异（一）</a></p>
+              <p class="item-date"><time datetime="2015-10-12T15:04:12.000Z" itemprop="datePublished">2015-10-12</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/09/15/swiper源码分析(一)/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/swiper源码分析/swiper.png
+)" alt="Swiper.js源码分析(一)" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></p>
+              <p class="item-title"><a href="/2015/09/15/swiper源码分析(一)/" class="title">Swiper.js源码分析(一)</a></p>
+              <p class="item-date"><time datetime="2015-09-15T14:18:45.000Z" itemprop="datePublished">2015-09-15</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/08/31/css3实现文字闪光效果/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/css3实现文字闪光效果/WhiteSmallTown.png
+)" alt="css3实现文字聚光灯闪过效果" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/08/31/css3实现文字闪光效果/" class="title">css3实现文字聚光灯闪过效果</a></p>
+              <p class="item-date"><time datetime="2015-08-31T14:18:45.000Z" itemprop="datePublished">2015-08-31</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/08/30/第一篇博客/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/第一篇博客/IMG_0222.JPG
+)" alt="第一篇博客" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/08/30/第一篇博客/" class="title">第一篇博客</a></p>
+              <p class="item-date"><time datetime="2015-08-30T15:55:45.000Z" itemprop="datePublished">2015-08-30</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swiper-js/">Swiper.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css预处理/">css预处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-float">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Swiper-js/" style="font-size: 10px;">Swiper.js</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/css预处理/" style="font-size: 10px;">css预处理</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+        </div>
+      </div>
+    </div>
+    <footer id="footer">
+  
+  <div class="container">
+    <div class="container-inner">
+      <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+      <div class="credit">
+        <h1 class="logo-wrap">
+          <a href="/" class="logo"></a>
+        </h1>
+        <p>&copy; 2015 白小城</p>
+        <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+    
+
+
+  <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+  <script src="/scrollLoading/jquery.scrollLoading.js" type="text/javascript"></script>
+  <script src="/scrollLoading/main.js" type="text/javascript"></script>
+
+
+<script src="/js/html-patch.js" type="text/javascript"></script>
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256220552'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256220552%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+
+
+  </div>
+</body>
+</html>
