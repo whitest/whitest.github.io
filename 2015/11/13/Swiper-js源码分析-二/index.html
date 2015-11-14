@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Swiper.js源码分析(二) | whiteSmallTown</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近一直在看nodejs的相关资料，几乎都快把swiper.js忘了，但是吧，既然开了这个系列，还是把源码分析完。上一回说了swiper的无new化和模块化，主要体现了当前环境下js框架的规范。js最初作为脚本语言，用在浏览器端，但是js的作用域、上下文、闭包等特性，可以让js面向对象编程(顺便说一句，面向对象的特点：封装，继承，多态。毕业后就这个记得最清楚)，所以有了现在的这些规范，让js向面向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swiper.js源码分析(二)">
+<meta property="og:url" content="whitesmalltown.com/2015/11/13/Swiper-js源码分析-二/index.html">
+<meta property="og:site_name" content="whiteSmallTown">
+<meta property="og:description" content="最近一直在看nodejs的相关资料，几乎都快把swiper.js忘了，但是吧，既然开了这个系列，还是把源码分析完。上一回说了swiper的无new化和模块化，主要体现了当前环境下js框架的规范。js最初作为脚本语言，用在浏览器端，但是js的作用域、上下文、闭包等特性，可以让js面向对象编程(顺便说一句，面向对象的特点：封装，继承，多态。毕业后就这个记得最清楚)，所以有了现在的这些规范，让js向面向">
+<meta property="og:image" content="whitesmalltown.com/imgs/swiper源码分析/ooc.jpg">
+<meta property="og:updated_time" content="2015-11-14T10:41:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swiper.js源码分析(二)">
+<meta name="twitter:description" content="最近一直在看nodejs的相关资料，几乎都快把swiper.js忘了，但是吧，既然开了这个系列，还是把源码分析完。上一回说了swiper的无new化和模块化，主要体现了当前环境下js框架的规范。js最初作为脚本语言，用在浏览器端，但是js的作用域、上下文、闭包等特性，可以让js面向对象编程(顺便说一句，面向对象的特点：封装，继承，多态。毕业后就这个记得最清楚)，所以有了现在的这些规范，让js向面向">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  
+    <link rel="stylesheet" href="/scrollLoading/style.css" type="text/css">
+  
+  
+
+
+  
+
+  
+    <link href='//fonts.useso.com/css?family=Titillium+Web:300,400,600' rel='stylesheet' type='text/css'>
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+</head>
+
+<body>
+  <div id="wrap">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div class="container">
+      <div class="container-inner">
+        <div id="header-title">
+          <h1 class="logo-wrap">
+            <a href="/" class="logo"></a>
+          </h1>
+          
+            <h2 class="subtitle-wrap">
+              <p class="subtitle">白色小城</p>
+            </h2>
+          
+        </div>
+        <div id="header-inner" class="nav-container">
+          <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+          <div class="nav-container-inner">
+            <ul id="main-nav">
+              
+                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/">主页</a></li>
+              
+                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Javascript/">Javascript</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></li></ul></li></ul>
+                  
+                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/about/index.html">关于</a></li>
+              
+            </ul>
+            <nav id="sub-nav">
+              <div id="search-form-wrap">
+                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="搜索"><input type="hidden" name="sitesearch" value="whitesmalltown.com"></form>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <div class="main-body container-inner">
+        <div class="main-body-inner">
+          <section id="main">
+            <div class="main-body-header">
+
+              <h1 class="header"><a class="page-title-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></h1>
+            </div>
+            <div class="main-body-content">
+              
+  <article id="post-Swiper-js源码分析-二" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+      <!--  -->
+      
+        <header class="article-header">
+          
+  
+    <h1 class="article-title" itemprop="name">
+      Swiper.js源码分析(二)
+    </h1>
+  
+
+        </header>
+      
+      <p class="article-byline">
+        <a href="/2015/11/13/Swiper-js源码分析-二/" class="article-date">
+  <time datetime="2015-11-13T14:02:38.000Z" itemprop="datePublished">2015-11-13</time>
+</a>
+      </p>
+      <div class="article-entry" itemprop="articleBody">
+        <p><img src="/imgs/swiper源码分析/ooc.jpg" alt="面向对象" title="面向对象"><br>最近一直在看nodejs的相关资料，几乎都快把swiper.js忘了，但是吧，既然开了这个系列，还是把源码分析完。<br>上一回说了swiper的无new化和模块化，主要体现了当前环境下js框架的规范。js最初作为脚本语言，用在浏览器端，但是js的作用域、上下文、闭包等特性，可以让js面向对象编程(顺便说一句，面向对象的特点：封装，继承，多态。毕业后就这个记得最清楚)，所以有了现在的这些规范，让js向面向对象这边靠。那这次就来看看，swiper里是怎么面向对象的。<br>官网上给了个使用方法示例，如下：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=<span class="string">"swiper-container"</span>&gt;</span><br><span class="line">  &lt;div <span class="keyword">class</span>=<span class="string">"swiper-wrapper"</span>&gt;</span><br><span class="line">    &lt;div <span class="keyword">class</span>=<span class="string">"swiper-slide"</span>&gt;slider1&lt;/div&gt;</span><br><span class="line">    &lt;div <span class="keyword">class</span>=<span class="string">"swiper-slide"</span>&gt;slider2&lt;/div&gt;</span><br><span class="line">    &lt;div <span class="keyword">class</span>=<span class="string">"swiper-slide"</span>&gt;slider3&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"><span class="keyword">var</span> mySwiper = <span class="keyword">new</span> Swiper(<span class="string">'.swiper-container'</span>, &#123;</span><br><span class="line">    autoplay: <span class="number">5000</span>,<span class="comment">//可选选项，自动滑动</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>两个参数：想要绑定的dom节点，和属性配置，再看看源码里面怎么写的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="pi">    'use strict'</span>;</span><br><span class="line">    <span class="keyword">var</span> $;</span><br><span class="line">    <span class="keyword">var</span> Swiper = <span class="function"><span class="keyword">function</span> (<span class="params">container, params</span>) </span>&#123; <span class="comment">//--两个参数：dom节点，属性配置 -- by WST</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Swiper)) <span class="keyword">return</span> <span class="keyword">new</span> Swiper(container, params);</span><br><span class="line">        <span class="keyword">var</span> defaults = &#123;</span><br><span class="line">            direction: <span class="string">'horizontal'</span>,</span><br><span class="line">            touchEventsTarget: <span class="string">'container'</span>,</span><br><span class="line">            initialSlide: <span class="number">0</span>,</span><br><span class="line">            speed: <span class="number">300</span>,</span><br><span class="line">            autoplay: <span class="literal">false</span>,</span><br><span class="line"></span><br><span class="line">            <span class="comment">// code...  -- by WST</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> initialVirtualTranslate = params &amp;&amp; params.virtualTranslate;</span><br><span class="line">        </span><br><span class="line">        params = params || &#123;&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> def <span class="keyword">in</span> defaults) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">typeof</span> params[def] === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">                params[def] = defaults[def];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> params[def] === <span class="string">'object'</span>) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> deepDef <span class="keyword">in</span> defaults[def]) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="keyword">typeof</span> params[def][deepDef] === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">                        params[def][deepDef] = defaults[def][deepDef];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//-- 以上 参数配置完成  -- by WST</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Swiper</span></span><br><span class="line">        <span class="keyword">var</span> s = <span class="keyword">this</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Version</span></span><br><span class="line">        s.version = <span class="string">'3.1.0'</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Params</span></span><br><span class="line">        s.params = params;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Classname</span></span><br><span class="line">        s.classNames = [];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这里是断点  -- by WST</span></span><br></pre></td></tr></table></figure></p>
+<p>代码中首先就创建了一个对象列表defaults，里面都是默认属性配置，你可以去官网上查看配置选项API，了解这些属性都表示什么。而那段for-in循环，则是查看params中，是否在defaults中含有相同属性，没有就添加进去。最后，将params加入到上下文中，这样就可以通过this.params.<em>*</em>来调用属性了。<br>再来看接下来的源码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 这里是上面的断点  -- by WST</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*=========================</span><br><span class="line">      Dom Library and plugins</span><br><span class="line">      ===========================*/</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> $ !== <span class="string">'undefined'</span> &amp;&amp; <span class="keyword">typeof</span> Dom7 !== <span class="string">'undefined'</span>)&#123;</span><br><span class="line">        $ = Dom7;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> $ === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> Dom7 === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">            $ = <span class="built_in">window</span>.Dom7 || <span class="built_in">window</span>.Zepto || <span class="built_in">window</span>.jQuery;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            $ = Dom7;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!$) <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Export it to Swiper instance</span></span><br><span class="line">    s.$ = $;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// code...  -- by WST</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 直至function swiper结束 -- by WST</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>如果你是个FEXer，你应该知道$对于js的意义，这原本只是个字符变量，但是jQuery的发展，让这个符号在FEX领域有了自己的意义，至少面向浏览器端，估计没有人再用$去封装个新方法吧。也许这就是大神和普通人的区别，跑题了。<br>上回说了，swiper.js是用一个立即执行函数封装起来的，因此在这里面声明的变量，都是立即执行函数中的局部变量，而立即函数中一开始，就初始化了变量$，因此，这里需要给$调用方法。zepto和jQ就不用说了，Dom7是作者自己封装的，在源码3300行左右。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*===========================</span><br><span class="line">Dom7 Library</span><br><span class="line">===========================*/</span></span><br><span class="line"><span class="keyword">var</span> Dom7 = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> Dom7 = <span class="function"><span class="keyword">function</span> (<span class="params">arr</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// code... -- by WST</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> $ = <span class="function"><span class="keyword">function</span> (<span class="params">selector, context</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// code... -- by WST</span></span><br><span class="line">    &#125;;</span><br><span class="line">    Dom7.prototype = &#123;</span><br><span class="line">        addClass: <span class="function"><span class="keyword">function</span> (<span class="params">className</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// code... -- by WST</span></span><br><span class="line">        &#125;,</span><br><span class="line">        removeClass: <span class="function"><span class="keyword">function</span> (<span class="params">className</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// code... -- by WST</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// other proto... -- by WST</span></span><br><span class="line">    &#125;;</span><br><span class="line">    $.fn = Dom7.prototype;</span><br><span class="line">    $.unique = <span class="function"><span class="keyword">function</span> (<span class="params">arr</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> unique = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (unique.indexOf(arr[i]) === -<span class="number">1</span>) unique.push(arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> unique;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> $;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>整个Dom7中，就定义了两个变量：Dom7和$，这里的Dom7是个局部变量，为了和外层Dom7区分，叫它小d吧。这两个变量被赋予了相应的方法，最后返回的是$，那就先来看看$。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $ = <span class="function"><span class="keyword">function</span> (<span class="params">selector, context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = [], i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (selector &amp;&amp; !context) &#123;</span><br><span class="line">        <span class="keyword">if</span> (selector <span class="keyword">instanceof</span> Dom7) &#123;</span><br><span class="line">            <span class="keyword">return</span> selector;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (selector) &#123;</span><br><span class="line">        <span class="comment">// String</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> selector === <span class="string">'string'</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> els, tempParent, html = selector.trim();</span><br><span class="line">            <span class="keyword">if</span> (html.indexOf(<span class="string">'&lt;'</span>) &gt;= <span class="number">0</span> &amp;&amp; html.indexOf(<span class="string">'&gt;'</span>) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">var</span> toCreate = <span class="string">'div'</span>;</span><br><span class="line">                <span class="keyword">if</span> (html.indexOf(<span class="string">'&lt;li'</span>) === <span class="number">0</span>) toCreate = <span class="string">'ul'</span>;</span><br><span class="line">                <span class="keyword">if</span> (html.indexOf(<span class="string">'&lt;tr'</span>) === <span class="number">0</span>) toCreate = <span class="string">'tbody'</span>;</span><br><span class="line">                <span class="keyword">if</span> (html.indexOf(<span class="string">'&lt;td'</span>) === <span class="number">0</span> || html.indexOf(<span class="string">'&lt;th'</span>) === <span class="number">0</span>) toCreate = <span class="string">'tr'</span>;</span><br><span class="line">                <span class="keyword">if</span> (html.indexOf(<span class="string">'&lt;tbody'</span>) === <span class="number">0</span>) toCreate = <span class="string">'table'</span>;</span><br><span class="line">                <span class="keyword">if</span> (html.indexOf(<span class="string">'&lt;option'</span>) === <span class="number">0</span>) toCreate = <span class="string">'select'</span>;</span><br><span class="line">                tempParent = <span class="built_in">document</span>.createElement(toCreate);</span><br><span class="line">                tempParent.innerHTML = selector;</span><br><span class="line">                <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; tempParent.childNodes.length; i++) &#123;</span><br><span class="line">                    arr.push(tempParent.childNodes[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (!context &amp;&amp; selector[<span class="number">0</span>] === <span class="string">'#'</span> &amp;&amp; !selector.match(<span class="regexp">/[ .&lt;&gt;:~]/</span>)) &#123;</span><br><span class="line">                    <span class="comment">// Pure ID selector</span></span><br><span class="line">                    els = [<span class="built_in">document</span>.getElementById(selector.split(<span class="string">'#'</span>)[<span class="number">1</span>])];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// Other selectors</span></span><br><span class="line">                    els = (context || <span class="built_in">document</span>).querySelectorAll(selector);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; els.length; i++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (els[i]) arr.push(els[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Node/element</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (selector.nodeType || selector === <span class="built_in">window</span> || selector === <span class="built_in">document</span>) &#123;</span><br><span class="line">            arr.push(selector);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//Array of elements or instance of Dom</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (selector.length &gt; <span class="number">0</span> &amp;&amp; selector[<span class="number">0</span>].nodeType) &#123;</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; selector.length; i++) &#123;</span><br><span class="line">                arr.push(selector[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Dom7(arr);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>两个参数，分别是selector和context，而且作者也注释的很清楚，selector是字符串时，是元素时，或是多个dom节点时，该怎样处理，而context表示在哪个节点树中遍历，而查找到的selector，不论是一个，还是多个，全都push到数组arr中，然后，作为小d的参数，构造函数。<br>再来看小d，prototype中添加了类似zepto或JQ封装的方法，再将arr参数进行遍历，使多个selector都可以使用原型链中的方法，这样，作者封装的Dom7，一个类似zepto或JQ，但功能和体积小于前两者（够用就行）的小库就封装好了。<br>可能有同学会发现，整个Dom7中，有一语句<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$.</span><span class="keyword">fn</span> = <span class="constant">Dom7.</span>prototype;</span><br></pre></td></tr></table></figure></p>
+<p>这个没有解释啊，好吧，现在就来解释解释。<br>继续看Dom7之后的语句：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*===========================</span><br><span class="line"> Get Dom libraries</span><br><span class="line"> ===========================*/</span></span><br><span class="line"><span class="keyword">var</span> swiperDomPlugins = [<span class="string">'jQuery'</span>, <span class="string">'Zepto'</span>, <span class="string">'Dom7'</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; swiperDomPlugins.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>[swiperDomPlugins[i]]) &#123;</span><br><span class="line">        addLibraryPlugin(<span class="built_in">window</span>[swiperDomPlugins[i]]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Required DOM Plugins</span></span><br><span class="line"><span class="keyword">var</span> domLib;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> Dom7 === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    domLib = <span class="built_in">window</span>.Dom7 || <span class="built_in">window</span>.Zepto || <span class="built_in">window</span>.jQuery;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    domLib = Dom7;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*===========================</span><br><span class="line">Add .swiper plugin from Dom libraries</span><br><span class="line">===========================*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addLibraryPlugin</span>(<span class="params">lib</span>) </span>&#123;</span><br><span class="line">    lib.fn.swiper = <span class="function"><span class="keyword">function</span> (<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> firstInstance;</span><br><span class="line">        lib(<span class="keyword">this</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> s = <span class="keyword">new</span> Swiper(<span class="keyword">this</span>, params);</span><br><span class="line">            <span class="keyword">if</span> (!firstInstance) firstInstance = s;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> firstInstance;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (domLib) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!(<span class="string">'transitionEnd'</span> <span class="keyword">in</span> domLib.fn)) &#123;</span><br><span class="line">        <span class="comment">// code... -- by WST</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!(<span class="string">'transform'</span> <span class="keyword">in</span> domLib.fn)) &#123;</span><br><span class="line">        <span class="comment">// code... -- by WST</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!(<span class="string">'transition'</span> <span class="keyword">in</span> domLib.fn)) &#123;</span><br><span class="line">        <span class="comment">// code... -- by WST</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里有个domLib，它指向[‘jQuery’, ‘Zepto’, ‘Dom7’]之一，总之，就是$，而在jQ、Zepto中，$.fn是指向$.prototype而存在的，因此作者自己封装了Dom7，为了作为简易版的JQ 或zepto，也给自己的$.fn指向了小d的prototype，这样在最下面，想像JQ和zepto那样追加transitionEnd等方法，同样也适用于Dom7了。</p>
+
+      </div>
+      <footer class="article-footer">
+        <a data-url="whitesmalltown.com/2015/11/13/Swiper-js源码分析-二/" data-id="cigyysbg8000npjs62xpolgdn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+        
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swiper-js/">Swiper.js</a></li></ul>
+
+      </footer>
+    </div>
+  </article>
+  
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Swiper-js源码分析-二" data-title="Swiper.js源码分析(二)" data-url="whitesmalltown.com/2015/11/13/Swiper-js源码分析-二/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'whitesmalltown'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+
+            </div>
+          </section>
+          <aside id="sidebar">
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+  <div class="sidebar-top">
+    <p>关注我 :</p>
+    <ul class="social-links">
+      
+        <li><a class="social-tooltip" title="weibo" href="http://weibo.com/u/1037991452" target="_blank"><i class="icon fa fa-weibo"></i></a></li>
+      
+    </ul>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/12/less与sass的差异（一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <p class="article-nav-title">less与sass的差异（一）</p>
+      <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+    </a>
+  
+</nav>
+
+  
+  <div class="widgets-container">
+    
+      
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/11/13/Swiper-js源码分析-二/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/swiper源码分析/ooc.jpg
+)" alt="Swiper.js源码分析(二)" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></p>
+              <p class="item-title"><a href="/2015/11/13/Swiper-js源码分析-二/" class="title">Swiper.js源码分析(二)</a></p>
+              <p class="item-date"><time datetime="2015-11-13T14:02:38.000Z" itemprop="datePublished">2015-11-13</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/10/12/less与sass的差异（一）/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/less与sass的差异/jiangxin.jpg
+)" alt="less与sass的差异（一）" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/10/12/less与sass的差异（一）/" class="title">less与sass的差异（一）</a></p>
+              <p class="item-date"><time datetime="2015-10-12T15:04:12.000Z" itemprop="datePublished">2015-10-12</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/09/15/swiper源码分析(一)/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/swiper源码分析/swiper.png
+)" alt="Swiper.js源码分析(一)" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></p>
+              <p class="item-title"><a href="/2015/09/15/swiper源码分析(一)/" class="title">Swiper.js源码分析(一)</a></p>
+              <p class="item-date"><time datetime="2015-09-15T14:18:45.000Z" itemprop="datePublished">2015-09-15</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/08/31/css3实现文字闪光效果/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/css3实现文字闪光效果/WhiteSmallTown.png
+)" alt="css3实现文字聚光灯闪过效果" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/08/31/css3实现文字闪光效果/" class="title">css3实现文字聚光灯闪过效果</a></p>
+              <p class="item-date"><time datetime="2015-08-31T14:18:45.000Z" itemprop="datePublished">2015-08-31</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/08/30/第一篇博客/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/第一篇博客/IMG_0222.JPG
+)" alt="第一篇博客" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/08/30/第一篇博客/" class="title">第一篇博客</a></p>
+              <p class="item-date"><time datetime="2015-08-30T15:55:45.000Z" itemprop="datePublished">2015-08-30</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a><span class="category-list-count">2</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swiper-js/">Swiper.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css预处理/">css预处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-float">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Swiper-js/" style="font-size: 20px;">Swiper.js</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/css预处理/" style="font-size: 10px;">css预处理</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+        </div>
+      </div>
+    </div>
+    <footer id="footer">
+  
+  <div class="container">
+    <div class="container-inner">
+      <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+      <div class="credit">
+        <h1 class="logo-wrap">
+          <a href="/" class="logo"></a>
+        </h1>
+        <p>&copy; 2015 白小城</p>
+        <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+    
+
+
+  <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+  <script src="/scrollLoading/jquery.scrollLoading.js" type="text/javascript"></script>
+  <script src="/scrollLoading/main.js" type="text/javascript"></script>
+
+
+<script src="/js/html-patch.js" type="text/javascript"></script>
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256220552'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256220552%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+
+
+  </div>
+</body>
+</html>

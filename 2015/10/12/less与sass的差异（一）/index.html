@@ -124,7 +124,7 @@ css预处理言归正传，来新公司也快两个月了，公司用到的css�
 <p>如果说我按照避免这些差异去给变量赋值，less或sass生成的css，都会相同，但是接下来要介绍的变量赋值，不是你想避免就可以避免的，就赋多个值。<br>首先，less和sass都可以给一个变量赋多个值，这点没有问题<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// less</span></span><br><span class="line"><span class="at_rule">@test:<span class="preprocessor"> 1px</span><span class="preprocessor"> solid</span> <span class="hexcolor">#ccc</span>;</span></span><br><span class="line"><span class="function">length</span>(<span class="at_rule">@test);</span>  <span class="comment">//  @test值的个数，结果为3</span></span><br><span class="line"><span class="function">extract</span>(<span class="at_rule">@test,<span class="preprocessor"> 2</span>);</span>  <span class="comment">//获取@test中的第二个值，结果为solid</span></span><br></pre></td></tr></table></figure></p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// scss</span></span><br><span class="line"><span class="variable">$test</span><span class="value">: <span class="number">1px</span> solid <span class="hexcolor">#ccc</span>;</span></span><br><span class="line"><span class="function">length</span>(<span class="variable">$test</span>);  <span class="comment">//  @test值的个数，结果为3</span></span><br><span class="line"><span class="function">nth</span>(<span class="variable">$test</span>, 2);  <span class="comment">//  获取@test中的第二个值，结果为solid</span></span><br></pre></td></tr></table></figure>
 <p>less和sass中，把这样的赋予多个值称为list，你可以把他们理解成一维数组，毕竟less和sass都对他们封装了上述两个常用方法。除了这两个以外，sass还有其他的方法，处理这样的list。<br>如果你说我不用sass里其他处理list的其他方法，就用这两个，是不是less和sass的变量处理就一样了，那就图样了，毕竟，有一维数组，就有多维数组。<br>我试了下，less处理多列表（类似js里的多维数组），只能靠”,” “空格” 去隔开，比如这样：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// less</span></span><br><span class="line"><span class="variable">@test-list:</span> a1 a2, b1 b2, c1 c2;  <span class="comment">// 类似一个二维数组</span></span><br></pre></td></tr></table></figure></p>
-<p>就这样，再往下就没法写了，因为less的变量里，不支持() | [] | {}这样的括号，又不知道”空格”再下一层用什么分开，而sass就不一样了，直接用小括号嵌套就可以了：<br><figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// scss</span></span><br><span class="line"><span class="comment">// 比less不知高到哪里去了</span></span><br><span class="line"><span class="keyword">$t</span>est-list: <span class="params">(</span><br><span class="line">    <span class="params">(</span><br><span class="line">        <span class="params">(a11, a12)</span>,</span><br><span class="line">        <span class="params">(a21, a22)</span>,</span><br><span class="line">    )</span>,</span><br><span class="line">    <span class="params">(</span><br><span class="line">        <span class="params">(b11, b12)</span>,</span><br><span class="line">        <span class="params">(b21, b22)</span>,</span><br><span class="line">    )</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure></p>
+<p>就这样，再往下就没法写了，因为less的变量里，不支持() | [] | {}这样的括号，又不知道”空格”再下一层用什么分开，而sass就不一样了，直接用小括号嵌套就可以了：<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// scss</span></span><br><span class="line"><span class="comment">// 比less不知高到哪里去了</span></span><br><span class="line">$test-list: <span class="comment">(</span><br><span class="line">    (</span><br><span class="line">        (a11, a12)</span>,</span><br><span class="line">        <span class="comment">(a21, a22)</span>,</span><br><span class="line">    ),</span><br><span class="line">    <span class="comment">(</span><br><span class="line">        (b11, b12)</span>,</span><br><span class="line">        <span class="comment">(b21, b22)</span>,</span><br><span class="line">    )</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
 <p>只要我想，还可以往下写，a111，乃至 a11111，当然越深越不好控制，但这确实很有用，而且sass中的变量，还有个less不能比的地方，就是map。<br>map就是用key和value组成，提到这两个关键字，你应该就明白了，类似js里的json格式，而且sass也为map提供了一些map的内置方法，如果灵活掌握了，要比less好用的多：<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// scss</span><br><span class="line">// 都可以和你谈笑风生了</span><br><span class="line"><span class="variable">$test</span>: (</span><br><span class="line">    <span class="string">'key1'</span>:(</span><br><span class="line">        <span class="string">'key11'</span> : <span class="number">11</span>px,</span><br><span class="line">        <span class="string">'key12'</span> : <span class="number">12</span>px</span><br><span class="line">    ),</span><br><span class="line">    <span class="string">'key2'</span>:(</span><br><span class="line">        <span class="string">'key21'</span> : <span class="number">21</span>px,</span><br><span class="line">        <span class="string">'key22'</span> : <span class="number">22</span>px</span><br><span class="line">    )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">.test&#123;</span><br><span class="line">    <span class="variable">$key1</span>: map-get(<span class="variable">$test</span>, key1);</span><br><span class="line">    width: map-get(<span class="variable">$key1</span>, key11);  // 结果为 width: <span class="number">11</span>px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>变量的差异说完了，觉得哪个好，不用我说了吧，下面的内容更让你明白。</p>
 <h3 id="逻辑关键字">逻辑关键字</h3><p>逻辑关键字对于程序员来说，都不陌生，很多语言都是想通的，sass也一样，主要有这么几个：<br><strong>@if @else</strong><br><strong>@for</strong><br><strong>@each</strong><br><strong>@while</strong><br>功能就不用多说了吧，大家一看就明白，至于用法看看api百度一下就很容易上手了。<br>那less呢？<br>据我观察，貌似就一个，when。<br>对，就一个when。<br>不管你是条件判断，还是循环，统统用when，比如下面这个官方给出的循环栗子：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.loop</span>(<span class="variable">@counter</span>) <span class="keyword">when</span> (<span class="variable">@counter</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="class">.loop</span>((<span class="variable">@counter</span> - <span class="number">1</span>));    <span class="comment">// next iteration</span></span><br><span class="line">    <span class="attribute">width</span>: (<span class="number">10px</span> * <span class="variable">@counter</span>); <span class="comment">// code for each iteration</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">div</span> &#123;</span><br><span class="line">    <span class="class">.loop</span>(<span class="number">5</span>); <span class="comment">// launch the loop</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> *  输出结果为：</span><br><span class="line"> *</span><br><span class="line"> *  div &#123;</span><br><span class="line"> *      width: 10px;</span><br><span class="line"> *      width: 20px;</span><br><span class="line"> *      width: 30px;</span><br><span class="line"> *      width: 40px;</span><br><span class="line"> *      width: 50px;</span><br><span class="line"> *  &#125;</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure></p>
@@ -135,7 +135,7 @@ css预处理言归正传，来新公司也快两个月了，公司用到的css�
 
       </div>
       <footer class="article-footer">
-        <a data-url="whitesmalltown.com/2015/10/12/less与sass的差异（一）/" data-id="cifpge6aw000dzys6qf2sz0dc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+        <a data-url="whitesmalltown.com/2015/10/12/less与sass的差异（一）/" data-id="cigyysbfw000dpjs62d58mp9q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
         
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css预处理/">css预处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sass/">sass</a></li></ul>
@@ -181,6 +181,16 @@ css预处理言归正传，来新公司也快两个月了，公司用到的css�
     
 <nav id="article-nav">
   
+    <a href="/2015/11/13/Swiper-js源码分析-二/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <p class="article-nav-title">
+        
+          Swiper.js源码分析(二)
+        
+      </p>
+      <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+  
   
     <a href="/2015/09/15/swiper源码分析(一)/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
@@ -198,6 +208,26 @@ css预处理言归正传，来新公司也快两个月了，公司用到的css�
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/11/13/Swiper-js源码分析-二/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/swiper源码分析/ooc.jpg
+)" alt="Swiper.js源码分析(二)" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></p>
+              <p class="item-title"><a href="/2015/11/13/Swiper-js源码分析-二/" class="title">Swiper.js源码分析(二)</a></p>
+              <p class="item-date"><time datetime="2015-11-13T14:02:38.000Z" itemprop="datePublished">2015-11-13</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -288,7 +318,7 @@ css预处理言归正传，来新公司也快两个月了，公司用到的css�
   <div class="widget-wrap widget-list">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a><span class="category-list-count">1</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a><span class="category-list-count">2</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -298,7 +328,7 @@ css预处理言归正传，来新公司也快两个月了，公司用到的css�
   <div class="widget-wrap widget-list">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -308,7 +338,7 @@ css预处理言归正传，来新公司也快两个月了，公司用到的css�
   <div class="widget-wrap widget-list">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swiper-js/">Swiper.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css预处理/">css预处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swiper-js/">Swiper.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css预处理/">css预处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -318,7 +348,7 @@ css预处理言归正传，来新公司也快两个月了，公司用到的css�
   <div class="widget-wrap widget-float">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Swiper-js/" style="font-size: 10px;">Swiper.js</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/css预处理/" style="font-size: 10px;">css预处理</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+      <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Swiper-js/" style="font-size: 20px;">Swiper.js</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/css预处理/" style="font-size: 10px;">css预处理</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
     </div>
   </div>
 
