@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>angularjs(一)：用mvc改变前端的格局 | whiteSmallTown</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近一直没更新博客，之前太忙，没时间写，前段时间离职，又没心情写。这周换了工作，重新出发，博客也一样！
+格局先说说格局，一个人格局大小决定了做事的目的性与方法。比如之前，一个前端工程师（比如说我）接到一个项目后，关心的是设计出的页面，根据页面和语义化规则，搭出HTML页面，配上css，之后再考虑交互效果，用js获取节点，写出事件，比如点击啊，鼠标划过啊，再获取相对应的节点，加上效果，比如显示或隐藏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularjs(一)：用mvc改变前端的格局">
+<meta property="og:url" content="whitesmalltown.com/2016/01/23/用mvc改变前端的格局/index.html">
+<meta property="og:site_name" content="whiteSmallTown">
+<meta property="og:description" content="最近一直没更新博客，之前太忙，没时间写，前段时间离职，又没心情写。这周换了工作，重新出发，博客也一样！
+格局先说说格局，一个人格局大小决定了做事的目的性与方法。比如之前，一个前端工程师（比如说我）接到一个项目后，关心的是设计出的页面，根据页面和语义化规则，搭出HTML页面，配上css，之后再考虑交互效果，用js获取节点，写出事件，比如点击啊，鼠标划过啊，再获取相对应的节点，加上效果，比如显示或隐藏">
+<meta property="og:image" content="whitesmalltown.com/imgs/用mvc改变前端的格局/geju.jpg">
+<meta property="og:updated_time" content="2016-01-24T08:39:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angularjs(一)：用mvc改变前端的格局">
+<meta name="twitter:description" content="最近一直没更新博客，之前太忙，没时间写，前段时间离职，又没心情写。这周换了工作，重新出发，博客也一样！
+格局先说说格局，一个人格局大小决定了做事的目的性与方法。比如之前，一个前端工程师（比如说我）接到一个项目后，关心的是设计出的页面，根据页面和语义化规则，搭出HTML页面，配上css，之后再考虑交互效果，用js获取节点，写出事件，比如点击啊，鼠标划过啊，再获取相对应的节点，加上效果，比如显示或隐藏">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  
+    <link rel="stylesheet" href="/scrollLoading/style.css" type="text/css">
+  
+  
+
+
+  
+
+  
+    <link href='//fonts.useso.com/css?family=Titillium+Web:300,400,600' rel='stylesheet' type='text/css'>
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+</head>
+
+<body>
+  <div id="wrap">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div class="container">
+      <div class="container-inner">
+        <div id="header-title">
+          <h1 class="logo-wrap">
+            <a href="/" class="logo"></a>
+          </h1>
+          
+            <h2 class="subtitle-wrap">
+              <p class="subtitle">白色小城</p>
+            </h2>
+          
+        </div>
+        <div id="header-inner" class="nav-container">
+          <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+          <div class="nav-container-inner">
+            <ul id="main-nav">
+              
+                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/">主页</a></li>
+              
+                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Javascript/">Javascript</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Javascript/angularjs/">angularjs</a></li></ul></li></ul>
+                  
+                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/about/index.html">关于</a></li>
+              
+            </ul>
+            <nav id="sub-nav">
+              <div id="search-form-wrap">
+                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="搜索"><input type="hidden" name="sitesearch" value="whitesmalltown.com"></form>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <div class="main-body container-inner">
+        <div class="main-body-inner">
+          <section id="main">
+            <div class="main-body-header">
+
+              <h1 class="header"><a class="page-title-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Javascript/angularjs/">angularjs</a></h1>
+            </div>
+            <div class="main-body-content">
+              
+  <article id="post-用mvc改变前端的格局" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+      <!--  -->
+      
+        <header class="article-header">
+          
+  
+    <h1 class="article-title" itemprop="name">
+      angularjs(一)：用mvc改变前端的格局
+    </h1>
+  
+
+        </header>
+      
+      <p class="article-byline">
+        <a href="/2016/01/23/用mvc改变前端的格局/" class="article-date">
+  <time datetime="2016-01-23T14:02:38.000Z" itemprop="datePublished">2016-01-23</time>
+</a>
+      </p>
+      <div class="article-entry" itemprop="articleBody">
+        <p><img src="/imgs/用mvc改变前端的格局/geju.jpg" alt="格局" title="格局"><br>最近一直没更新博客，之前太忙，没时间写，前段时间离职，又没心情写。<br>这周换了工作，重新出发，博客也一样！</p>
+<h2 id="格局">格局</h2><p>先说说格局，一个人格局大小决定了做事的目的性与方法。比如之前，一个前端工程师（比如说我）接到一个项目后，关心的是设计出的页面，根据页面和语义化规则，搭出HTML页面，配上css，之后再考虑交互效果，用js获取节点，写出事件，比如点击啊，鼠标划过啊，再获取相对应的节点，加上效果，比如显示或隐藏。好一点的工程师，会考虑事件委托，view和controller分离（比如动画效果写在一个css里，让节点添加classname）等等等等。直到有一天，跟着博士做一个项目搭了个backbone之后，醍醐灌顶，才发现前端可以这么做，之后就开始学习前端MVC。而前端MVC比较火的，必然就是angular了。<br>这两天重构新公司的前端，用了angular，有个比较常见的功能，导航菜单，可能最多深入到三级菜单。通常我们会这样写：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// html</span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"menu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">data-src</span>=<span class="value">"/src1"</span>&gt;</span>一级菜单1<span class="tag">&lt;/<span class="title">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">h3</span> <span class="attribute">data-src</span>=<span class="value">"/src1_1"</span>&gt;</span>二级菜单1-1<span class="tag">&lt;/<span class="title">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">h3</span> <span class="attribute">data-src</span>=<span class="value">"/src1_2"</span>&gt;</span>二级菜单1-2<span class="tag">&lt;/<span class="title">h3</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="title">h4</span> <span class="attribute">data-src</span>=<span class="value">"/src1_2_1"</span>&gt;</span>三级菜单1-2-1<span class="tag">&lt;/<span class="title">h4</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">data-src</span>=<span class="value">"/src2"</span>&gt;</span>一级菜单2<span class="tag">&lt;/<span class="title">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">h3</span> <span class="attribute">data-src</span>=<span class="value">"/src2_1"</span>&gt;</span>二级菜单2-1<span class="tag">&lt;/<span class="title">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">h3</span> <span class="attribute">data-src</span>=<span class="value">"/src2_2"</span>&gt;</span>二级菜单2-2<span class="tag">&lt;/<span class="title">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>通常这段html会根据后台返回的数据，用模板生成页面<br><figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">// 后台返回的菜单哈希表</span><br><span class="line">nav = &#123;</span><br><span class="line">    first1: &#123;</span><br><span class="line">        name: '一级菜单1',</span><br><span class="line">        src: '/src1',</span><br><span class="line">        children: &#123;</span><br><span class="line">            second1_1: &#123;</span><br><span class="line">                name: '二级菜单1-1',</span><br><span class="line">                src: '/src1_1',</span><br><span class="line">            &#125;,</span><br><span class="line">            second1_2: &#123;</span><br><span class="line">                name: '二级菜单1-2',</span><br><span class="line">                src: '/src1_1',</span><br><span class="line">                children:&#123;</span><br><span class="line">                    third1_2_1:&#123;</span><br><span class="line">                        name: '三级菜单1-2-1',</span><br><span class="line">                        src: '/src1_2_1',                     </span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    first2: &#123;</span><br><span class="line">        name: '一级菜单2',</span><br><span class="line">        src: '/src2',</span><br><span class="line">        children: &#123;</span><br><span class="line">            second2_1: &#123;</span><br><span class="line">                name: '二级菜单2-1',</span><br><span class="line">                src: '/src2_1',</span><br><span class="line">            &#125;,</span><br><span class="line">            second2_2: &#123;</span><br><span class="line">                name: '二级菜单2-2',</span><br><span class="line">                src: '/src2_1'</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 只看大概，别太在意代码细节</span><br><span class="line"> */ </span><br><span class="line">// template</span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"menu"</span>&gt;</span></span><br><span class="line">    </span><span class="vbscript">&lt;% <span class="keyword">for</span>(var first <span class="keyword">in</span> nav)&#123; %&gt;</span><span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">data-src</span>=<span class="value">"</span></span></span><span class="vbscript">&lt;%= nav[first].src %&gt;</span><span class="xml"><span class="tag"><span class="value">"</span>&gt;</span> nav[first].name <span class="tag">&lt;/<span class="title">h2</span>&gt;</span></span><br><span class="line">        </span><span class="vbscript">&lt;% <span class="keyword">if</span>( !!nav[first].children )&#123; %&gt;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">            </span><span class="vbscript">&lt;% <span class="keyword">for</span>(var <span class="built_in">second</span> <span class="keyword">in</span> nav[first])&#123; %&gt;</span><span class="xml"></span><br><span class="line">            <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">h3</span> <span class="attribute">data-src</span>=<span class="value">"</span></span></span><span class="vbscript">&lt;%= nav[first][<span class="built_in">second</span>].src %&gt;</span><span class="xml"><span class="tag"><span class="value">"</span>&gt;</span> nav[first][second].name <span class="tag">&lt;/<span class="title">h3</span>&gt;</span></span><br><span class="line">                </span><span class="vbscript">&lt;% <span class="keyword">if</span>( !!nav[first][<span class="built_in">second</span>].children )&#123; %&gt;</span><span class="xml"></span><br><span class="line">                <span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">                    </span><span class="vbscript">&lt;% <span class="keyword">for</span>(var third <span class="keyword">in</span> nav[first][<span class="built_in">second</span>])&#123; %&gt;</span><span class="xml"></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="title">h3</span> <span class="attribute">data-src</span>=<span class="value">"</span></span></span><span class="vbscript">&lt;%= nav[first][<span class="built_in">second</span>][third].src %&gt;</span><span class="xml"><span class="tag"><span class="value">"</span>&gt;</span> nav[first][second][third].name <span class="tag">&lt;/<span class="title">h3</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                    </span><span class="vbscript">&lt;% &#125; %&gt;</span><span class="xml"></span><br><span class="line">                <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">                </span><span class="vbscript">&lt;% &#125; %&gt;</span><span class="xml"></span><br><span class="line">            <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">            </span><span class="vbscript">&lt;% &#125; %&gt;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">        </span><span class="vbscript">&lt;% &#125; %&gt;</span><span class="xml"></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">    </span><span class="vbscript">&lt;% &#125; %&gt;</span><span class="xml"></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>当然，菜单是要有效果的，点击每一个选项时，如果有子菜单，就打开子菜单，其他菜单关闭；如果没有，就跳转相对应的页面，链接写在“data-src”属性里。<br>你用jQuery可以这样写：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * 只看大概，别太在意代码细节</span><br><span class="line"> */</span></span><br><span class="line">$(<span class="string">'#menu'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!ev.target.getAttribute(<span class="string">'data-src'</span>)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 没有下一级菜单，直接根据当前链接条</span></span><br><span class="line">    <span class="keyword">if</span>( !$(ev.target).next()[<span class="number">0</span>] || <span class="string">'ul'</span> != $(ev.target).next()[<span class="number">0</span>].tagName.toLowerCase())&#123;</span><br><span class="line">        <span class="built_in">window</span>.location.href = ev.target.getAttribute(<span class="string">'data-src'</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 有子菜单，就打开/关闭子菜单，其他菜单关闭</span></span><br><span class="line">    $(<span class="keyword">this</span>).find(<span class="string">'ul'</span>).hide();</span><br><span class="line">    $(ev.target).next().show();</span><br><span class="line">    $(ev.target).parents(<span class="string">'ul'</span>).show();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>而且，在初始化页面时，css里，还要将#menu下的所有ul标签隐藏掉，给用户感觉到所有深层次的菜单栏是关闭的状态。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// css</span></span><br><span class="line"><span class="id">#menu</span> <span class="tag">ul</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h6 id="可以点这里看demo：jquery制作三级菜单">可以点这里看demo：<a href="http://runjs.cn/code/8yhmlpsf" target="_blank" rel="external">jquery制作三级菜单</a></h6><p>像这样写出一段代码，但前提是，设计要先给出设计图，我来决定用 ul&gt;li&gt;ul&gt;li 这种形式去做，然后，用js监听，当被点击的节点是 h标签 时，兄弟节点ul显示，并且控制父级或祖父级ul显示，如果没有兄弟节点ul，就依据src跳转页面。</p>
+<p>但是…但是，可能以后产品迭代中，或者开发一半时，产品需求变了，根据设计师修改的设计图，和更符合语义化规则的工匠精神，上面那段html需要变化，ul&gt;li要改成 dl&gt;dt+dd，更甚者 ul&gt;li 可能要改成 table&gt;thead+tbody 的形式（不一定是上面举的导航列表的例子），这时，要改的js代码就多了，因为节点变了，甚至里面的逻辑也变了。同时，你要改css，html。</p>
+<h3 id="用angular构建">用angular构建</h3><p>先贴代码<br><figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">// html</span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"first in nav"</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">ng-click</span>=<span class="value">"navClick(first)"</span>&gt;</span> </span><span class="expression">&#123;&#123; <span class="variable">first.name</span> &#125;&#125;</span><span class="xml"> <span class="tag">&lt;/<span class="title">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">ng-if</span>=<span class="value">"first.checked"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"second in first.children"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">h3</span> <span class="attribute">ng-click</span>=<span class="value">"navClick(second)"</span>&gt;</span> </span><span class="expression">&#123;&#123; <span class="variable">second.name</span> &#125;&#125;</span><span class="xml"> <span class="tag">&lt;/<span class="title">h3</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">ng-if</span>=<span class="value">"second.checked"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"third in second.children"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="title">h4</span> <span class="attribute">ng-click</span>=<span class="value">"navClick(third)"</span>&gt;</span> </span><span class="expression">&#123;&#123; <span class="variable">third.name</span> &#125;&#125;</span><span class="xml"> <span class="tag">&lt;/<span class="title">h4</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>稍微了解angular，就明白各个指令的意思，这里也为h标签绑定了navClick()点击事件，接下来就考虑navClick函数怎么写。<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">// js</span><br><span class="line"></span><br><span class="line">// 后台返回的菜单哈希表</span><br><span class="line">nav = &#123;</span><br><span class="line">    first1: &#123;</span><br><span class="line">        name: <span class="string">'一级菜单1'</span>,</span><br><span class="line">        src: <span class="string">'/src1'</span>,</span><br><span class="line">        children: &#123;</span><br><span class="line">            second1_1: &#123;</span><br><span class="line">                name: <span class="string">'二级菜单1-1'</span>,</span><br><span class="line">                src: <span class="string">'/src1_1'</span>,</span><br><span class="line">                parent: <span class="string">'first1'</span></span><br><span class="line">            &#125;,</span><br><span class="line">            second1_2: &#123;</span><br><span class="line">                name: <span class="string">'二级菜单1-2'</span>,</span><br><span class="line">                src: <span class="string">'/src1_1'</span>,</span><br><span class="line">                parent: <span class="string">'first1'</span>,</span><br><span class="line">                children:&#123;</span><br><span class="line">                    third1_2_1:&#123;</span><br><span class="line">                        name: <span class="string">'三级菜单1-2-1'</span>,</span><br><span class="line">                        src: <span class="string">'/src1_2_1'</span>,   </span><br><span class="line">                        parent: <span class="string">'second1_2'</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    first2: &#123;</span><br><span class="line">        name: <span class="string">'一级菜单2'</span>,</span><br><span class="line">        src: <span class="string">'/src2'</span>,</span><br><span class="line">        children: &#123;</span><br><span class="line">            second2_1: &#123;</span><br><span class="line">                name: <span class="string">'二级菜单2-1'</span>,</span><br><span class="line">                src: <span class="string">'/src2_1'</span>,</span><br><span class="line">                parent: <span class="string">'first2'</span></span><br><span class="line">            &#125;,</span><br><span class="line">            second2_2: &#123;</span><br><span class="line">                name: <span class="string">'二级菜单2-2'</span>,</span><br><span class="line">                src: <span class="string">'/src2_1'</span>,</span><br><span class="line">                parent: <span class="string">'first2'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$scope</span>.nav = nav;</span><br><span class="line"><span class="keyword">function</span> unCheck(node) &#123;</span><br><span class="line">    for (var i in node) &#123;</span><br><span class="line">        node[i].checked = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$scope</span>.navClick = <span class="keyword">function</span>(key, <span class="variable">$event</span>) &#123;</span><br><span class="line">    if (!key.children) &#123;</span><br><span class="line">        // 跳转链接</span><br><span class="line">        <span class="variable">$location</span>.path( key.src );</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!!key.checked) return;</span><br><span class="line">    if (!key.parent) &#123;</span><br><span class="line">        unCheck(<span class="variable">$scope</span>.nav);</span><br><span class="line">        unCheck(key.children);</span><br><span class="line">        key.checked = true;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    key.checked = true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在上面代码里，大家注意到navClick()中完全没有控制html标签的地方，完完全全是在操作$scope.nav里的数据，大家可以看看demo：</p>
+<h6 id="可以点这里看demo：angular制作三级菜单">可以点这里看demo：<a href="http://runjs.cn/code/c0egvs4a" target="_blank" rel="external">angular制作三级菜单</a></h6><p>开始学习angular时，最重要的一点就是，不能再像之前那样，考虑怎样操作dom，因此angular中应该避免使用JQuery。<br>我在做这个demo之前，也不知不觉的去想，点击h标签dom时，父节点要如何处理，子节点要如何处理。这都是由于之前的前端开发方式印象太深。<br>突然有一天，就好像顿悟了一样，在使用angular框架时，考虑的重点应该放在数据结构上，就像上面的$scope.nav，根据需求，要给用户展现哪些内容，就将哪些key中的check属性打开（设置为true），其余关闭，完全不必修改html或css。<br>同样，产品有需求要改动页面，设计图需要你改变html结构，你只需修改html，并把对应的事件加在标签里，而不用修改js代码，也不需要考虑在css里修改初始化属性。做到mvc（或mv*）分离。</p>
+<h3 id="结语">结语</h3><p>到新公司前，面试官面我时，问了我一个问题：你觉得怎样去区分初级、中级和高级前端工程师。当时答得也不是很好，后来我回家想了想，其实封装个类似jquery的框架（api没jquery那么多，常用的即可），入行一两年差不多都能封装一个。可能初级工程师写的比较纯粹，就是为了实现功能，如果功力深一些，会考虑很多，比如封装、原型链继承、优化性能、减少代码量。<br>如果是中级或高级工程师，他们的格局更大一些，他们关注的不再是针对单一问题，去封装个函数，而是去根据js语言的缺陷，去制定一种设计模式，更符合软件工程思想，甚至不再单一使用js去封装。<br>不管你是写代码，还是做其他事，格局都要大一些，看到的应该比别人远一些，而不是什么事都看眼前，别的不多说了。<br>当然，不是说会用angular就比jquery高大上了，不同的框架针对不同的问题。<br>最后，昨天媳妇生日，祝她生日快乐，又老了一岁。</p>
+
+      </div>
+      <footer class="article-footer">
+        <a data-url="whitesmalltown.com/2016/01/23/用mvc改变前端的格局/" data-id="cijpt44hz0004mvs6bw18u00o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+        
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/">angularjs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端mvc/">前端mvc</a></li></ul>
+
+      </footer>
+    </div>
+  </article>
+  
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-用mvc改变前端的格局" data-title="angularjs(一)：用mvc改变前端的格局" data-url="whitesmalltown.com/2016/01/23/用mvc改变前端的格局/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'whitesmalltown'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+
+            </div>
+          </section>
+          <aside id="sidebar">
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+  <div class="sidebar-top">
+    <p>关注我 :</p>
+    <ul class="social-links">
+      
+        <li><a class="social-tooltip" title="weibo" href="http://weibo.com/u/1037991452" target="_blank"><i class="icon fa fa-weibo"></i></a></li>
+      
+    </ul>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/13/Swiper-js源码分析-二/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <p class="article-nav-title">Swiper.js源码分析(二)</p>
+      <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+    </a>
+  
+</nav>
+
+  
+  <div class="widgets-container">
+    
+      
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2016/01/23/用mvc改变前端的格局/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/用mvc改变前端的格局/geju.jpg
+)" alt="angularjs(一)：用mvc改变前端的格局" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Javascript/angularjs/">angularjs</a></p>
+              <p class="item-title"><a href="/2016/01/23/用mvc改变前端的格局/" class="title">angularjs(一)：用mvc改变前端的格局</a></p>
+              <p class="item-date"><time datetime="2016-01-23T14:02:38.000Z" itemprop="datePublished">2016-01-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/11/13/Swiper-js源码分析-二/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/swiper源码分析/oop.jpg
+)" alt="Swiper.js源码分析(二)" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></p>
+              <p class="item-title"><a href="/2015/11/13/Swiper-js源码分析-二/" class="title">Swiper.js源码分析(二)</a></p>
+              <p class="item-date"><time datetime="2015-11-13T14:02:38.000Z" itemprop="datePublished">2015-11-13</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/10/12/less与sass的差异（一）/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/less与sass的差异/jiangxin.jpg
+)" alt="less与sass的差异（一）" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/10/12/less与sass的差异（一）/" class="title">less与sass的差异（一）</a></p>
+              <p class="item-date"><time datetime="2015-10-12T15:04:12.000Z" itemprop="datePublished">2015-10-12</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/09/15/swiper源码分析(一)/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/swiper源码分析/swiper.png
+)" alt="Swiper.js源码分析(一)" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></p>
+              <p class="item-title"><a href="/2015/09/15/swiper源码分析(一)/" class="title">Swiper.js源码分析(一)</a></p>
+              <p class="item-date"><time datetime="2015-09-15T14:18:45.000Z" itemprop="datePublished">2015-09-15</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              
+<a href="/2015/08/31/css3实现文字闪光效果/" class="thumbnail">
+  
+    <span style="background-image:url(/imgs/css3实现文字闪光效果/WhiteSmallTown.png
+)" alt="css3实现文字聚光灯闪过效果" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/08/31/css3实现文字闪光效果/" class="title">css3实现文字聚光灯闪过效果</a></p>
+              <p class="item-date"><time datetime="2015-08-31T14:18:45.000Z" itemprop="datePublished">2015-08-31</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/angularjs/">angularjs</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swiper-js/">Swiper.js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/">css3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css预处理/">css预处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端mvc/">前端mvc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-float">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Swiper-js/" style="font-size: 15px;">Swiper.js</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/css预处理/" style="font-size: 10px;">css预处理</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/sass/" style="font-size: 10px;">sass</a> <a href="/tags/前端mvc/" style="font-size: 10px;">前端mvc</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io">Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+        </div>
+      </div>
+    </div>
+    <footer id="footer">
+  
+  <div class="container">
+    <div class="container-inner">
+      <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+      <div class="credit">
+        <h1 class="logo-wrap">
+          <a href="/" class="logo"></a>
+        </h1>
+        <p>&copy; 2016 白小城</p>
+        <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+    
+
+
+  <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+  <script src="/scrollLoading/jquery.scrollLoading.js" type="text/javascript"></script>
+  <script src="/scrollLoading/main.js" type="text/javascript"></script>
+
+
+<script src="/js/html-patch.js" type="text/javascript"></script>
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256220552'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256220552%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+
+
+  </div>
+</body>
+</html>
