@@ -3,17 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015/11 | whiteSmallTown</title>
+  <title>angularjs(三)：angular的模块化(上) | whiteSmallTown</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="白小城的个人blog | javascript | html5 | css3 | nodejs">
-<meta property="og:type" content="website">
-<meta property="og:title" content="whiteSmallTown">
-<meta property="og:url" content="whitesmalltown.com/archives/2015/11/index.html">
+  <meta name="description" content="最近项目开发到了稳定阶段，业务逻辑也很清晰，上周挤出了时间对部分代码进行了优化。
+每次在网上找资料时，都会看到别人总结出来的一些经验时，可能当时的项目没那么大，感觉没什么，但一到项目进入了一定阶段，就会发现原来别人总结的真的很有道理，今天就来说说之前一直忽略，现在感觉很有道理的angular的模块管理。
+面向对象模块化管理其实是面向对象的一种表现，我们可以将公共的方法或组件单独提出来，需要时进行调">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularjs(三)：angular的模块化(上)">
+<meta property="og:url" content="whitesmalltown.com/2016/07/28/angular的模块化/index.html">
 <meta property="og:site_name" content="whiteSmallTown">
-<meta property="og:description" content="白小城的个人blog | javascript | html5 | css3 | nodejs">
+<meta property="og:description" content="最近项目开发到了稳定阶段，业务逻辑也很清晰，上周挤出了时间对部分代码进行了优化。
+每次在网上找资料时，都会看到别人总结出来的一些经验时，可能当时的项目没那么大，感觉没什么，但一到项目进入了一定阶段，就会发现原来别人总结的真的很有道理，今天就来说说之前一直忽略，现在感觉很有道理的angular的模块管理。
+面向对象模块化管理其实是面向对象的一种表现，我们可以将公共的方法或组件单独提出来，需要时进行调">
+<meta property="og:image" content="whitesmalltown.com/imgs/angular的模块化/module.jpeg">
+<meta property="og:updated_time" content="2016-07-27T17:18:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="whiteSmallTown">
-<meta name="twitter:description" content="白小城的个人blog | javascript | html5 | css3 | nodejs">
+<meta name="twitter:title" content="angularjs(三)：angular的模块化(上)">
+<meta name="twitter:description" content="最近项目开发到了稳定阶段，业务逻辑也很清晰，上周挤出了时间对部分代码进行了优化。
+每次在网上找资料时，都会看到别人总结出来的一些经验时，可能当时的项目没那么大，感觉没什么，但一到项目进入了一定阶段，就会发现原来别人总结的真的很有道理，今天就来说说之前一直忽略，现在感觉很有道理的angular的模块管理。
+面向对象模块化管理其实是面向对象的一种表现，我们可以将公共的方法或组件单独提出来，需要时进行调">
   
   
     <link rel="icon" href="/favicon.png">
@@ -83,60 +91,73 @@
           <section id="main">
             <div class="main-body-header">
 
-              <h1 class="header"><i class="icon fa fa-archive"></i>归档: 2015/11</h1>
+              <h1 class="header"><a class="page-title-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Javascript/angularjs/">angularjs</a></h1>
             </div>
             <div class="main-body-content">
               
-  
-  
-    
-    
+  <article id="post-angular的模块化" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+      <!--  -->
       
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year"><i class="icon fa fa-calendar-o"></i>2015</a>
-        </div>
-        <div class="archives">
-    
-    
-    
-      <div class="article-row">
-    
-        
-  <article class="article article-summary">
-    <div class="article-summary-inner">
-      
-<a href="/2015/11/13/Swiper-js源码分析-二/" class="thumbnail">
+        <header class="article-header">
+          
   
-    <span style="background-image:url(/imgs/swiper源码分析/oop.jpg
-)" alt="Swiper.js源码分析(二)" class="thumbnail-image"></span>
+    <h1 class="article-title" itemprop="name">
+      angularjs(三)：angular的模块化(上)
+    </h1>
   
-</a>
 
-      <div class="article-meta">
-        <p class="category"><a class="article-category-link" href="/categories/Javascript/">Javascript</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Javascript/Swiper-js/">Swiper.js</a></p>
-        <p class="date"><time datetime="2015-11-13T14:02:38.000Z" itemprop="datePublished">2015-11-13</time></p>
-      </div>
-      <h2 class="article-title">
-        <a href="/2015/11/13/Swiper-js源码分析-二/" class="title">Swiper.js源码分析(二)</a>
-      </h2>
-      <p class="article-excerpt">
-        
-        最近一直在看nodejs的相关资料，几乎都快把swiper.js忘了，但是吧，既然开了这个系列，还是把源码分析完。上一回说了swiper的无new化和模块化，主要体现了当前环境下js框架的规范。js最初作为脚本语言，用在浏览器端，但是js的作用域、上下文、闭包等特性，可以让js面向对象编程(顺便说一句，面向对象的特点：封装，继承，多态。毕业后就这个记得最清楚)，所以有了现在的这些规范，让js向面向
+        </header>
+      
+      <p class="article-byline">
+        <a href="/2016/07/28/angular的模块化/" class="article-date">
+  <time datetime="2016-07-27T16:21:38.000Z" itemprop="datePublished">2016-07-28</time>
+</a>
       </p>
+      <div class="article-entry" itemprop="articleBody">
+        <p><img src="/imgs/angular的模块化/module.jpeg" alt="模块化" title="模块化"><br>最近项目开发到了稳定阶段，业务逻辑也很清晰，上周挤出了时间对部分代码进行了优化。</p>
+<p>每次在网上找资料时，都会看到别人总结出来的一些经验时，可能当时的项目没那么大，感觉没什么，但一到项目进入了一定阶段，就会发现原来别人总结的真的很有道理，今天就来说说之前一直忽略，现在感觉很有道理的angular的模块管理。</p>
+<h3 id="面向对象">面向对象</h3><p>模块化管理其实是面向对象的一种表现，我们可以将公共的方法或组件单独提出来，需要时进行调用，（封装，继承，多态，不知为什么这个记得特别清楚）。说到JS的面向对象，要说的挺多的，这里就不赘述了，书上都有。angular作为一个mvvm的框架，必然会有自己的面向对象开发。</p>
+<h3 id="新建一个模块">新建一个模块</h3><p>JS里新建一个对象方法有很多，特别是现在的ES6的标准中，提供了class关键字，更方便我们创建，比如这样：<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> mod &#123;</span><br><span class="line">    <span class="constructor"><span class="keyword">constructor</span>(params)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.params = params;</span><br><span class="line">    &#125;</span><br><span class="line">    fn1()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其实ES6中的class，类似之前的原型设计模式，在一个function的原型链上绑定方法。在配合ES6的模块化管理，我们可以将封装好的class进行输出。比如下面这样：<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 这是一个js文件：a.js */</span></span><br><span class="line"><span class="keyword">class</span> a&#123;</span><br><span class="line">    <span class="constructor"><span class="keyword">constructor</span>()</span>&#123;&#125;</span><br><span class="line">    add(x, y)&#123;</span><br><span class="line">        <span class="keyword">return</span> x + y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> a;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 这是另一个js文件：b.js */</span></span><br><span class="line"><span class="keyword">import</span> fn <span class="keyword">from</span> <span class="string">'./a.js'</span>;</span><br><span class="line"><span class="keyword">const</span> z = fn.add(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(z);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p>怎么样，是不是又有种Java和JavaScript是什么关系的困惑了。<br>这就是ES6的模块化管理，一个文件是一个模块，在其他文件中想用时，直接引用。<br>angular有他自己的一套哲学体系，用来封装方法并多次调用。当我们想新建一个angular的模块时，用angular.module()方法。<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">angular</span><br><span class="line">    .<span class="keyword">module</span>(<span class="comment">'a', []);</span></span><br></pre></td></tr></table></figure></p>
+<p>这里面第一个参数是模块的名称，第二个参数是个数组，数组里可以添加其他模块的名称，表示引用其他模块。<br>当我们想给这个模块定义一写方法时，可以使用angular.factory()或angular.service()。<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">angular</span><br><span class="line">    .<span class="built_in">module</span>(<span class="string">'a'</span>, [])</span><br><span class="line">    .factory(<span class="string">'fnA'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            add : <span class="function"><span class="params">(x, y)</span> =&gt;</span> x + y,</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上面代码，我们封装好了一个模块a，模块a创建了一个对外的方法fnA，fnA里面的return，就是绑在fnA原型上的、可以调用的方法。<br>当我们想要调用时，可以这样：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">angular</span><br><span class="line">    .<span class="built_in">module</span>(<span class="string">'b'</span>, [<span class="string">'a'</span>])</span><br><span class="line">    .controller(<span class="string">'b'</span>, [<span class="string">'fnA'</span>, <span class="function"><span class="params">(fnA)</span>=&gt;</span>&#123;</span><br><span class="line">        const z = fnA.add(x, y);</span><br><span class="line">        <span class="built_in">console</span>.log(z)  <span class="regexp">//</span> <span class="number">3</span></span><br><span class="line">    &#125;]);</span><br></pre></td></tr></table></figure></p>
+<p>这是factory()，service()与他在构建方法时没有区别，但是在调用service()创建的方法时，会new一下这个方法。有关new，这里就不赘述了，每个JSer都懂。</p>
+<h3 id="最后">最后</h3><p>先写这么多吧，了解了angular.factory()和angular.service()，基本的angular面向对象编程就可以开始了，但是想把代码写的优雅，这还不够。下一篇再说说如何重复使用html组件。</p>
+
+      </div>
+      <footer class="article-footer">
+        <a data-url="whitesmalltown.com/2016/07/28/angular的模块化/" data-id="cir55ugpk0015aas6j16lczo8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+        
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angularjs/">angularjs</a></li></ul>
+
+      </footer>
     </div>
   </article>
-
-    
-      </div>
-    
   
   
-    </div></section>
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-angular的模块化" data-title="angularjs(三)：angular的模块化(上)" data-url="whitesmalltown.com/2016/07/28/angular的模块化/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'whitesmalltown'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
   
-  
-
 
             </div>
           </section>
@@ -150,6 +171,19 @@
       
     </ul>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/06/给你一个promise/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <p class="article-nav-title">angularjs(二)：给你一个promise</p>
+      <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+    </a>
+  
+</nav>
+
   
   <div class="widgets-container">
     
